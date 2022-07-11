@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View, Dimensions } from "react-native";
 import Fridge from "./Fridge";
 
