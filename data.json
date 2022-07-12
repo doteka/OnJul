@@ -1,0 +1,52 @@
+[
+  {
+    "vegetable": "🧅",
+    "name": "양파",
+    "count": 5
+  },
+  {
+    "vegetable": "🍌",
+    "name": "바나나",
+    "count": 8
+  },
+  {
+    "vegetable": "🍇",
+    "name": "포도",
+    "count": 3
+  },
+  {
+    "vegetable": "🥒",
+    "name": "오이",
+
+    "count": 3
+  },
+  {
+    "vegetable": "🍈",
+    "name": "메론",
+
+    "count": 1
+  },
+  {
+    "vegetable": "🥓",
+    "name": "베이컨",
+
+    "count": 8
+  },
+  {
+    "vegetable": "🍅",
+    "name": "토마토",
+
+    "count": 2
+  },
+  {
+    "vegetable": "🥦",
+    "name": "브로콜리",
+
+    "count": 5
+  },
+  {
+    "vegetable": "🌽",
+    "name": "옥수수",
+    "count": 8
+  }
+]

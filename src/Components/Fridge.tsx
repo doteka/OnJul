@@ -8,53 +8,23 @@ import {
   ImageBackground,
   Pressable,
   Modal,
+  TextInput,
+  Alert,
 } from "react-native";
 import { DraxProvider, DraxList } from "react-native-drax";
 
+const data = require("../../data.json");
 // const { width, height } = Dimensions.get("window");
 
 const Fridge = ({ width, height }) => {
   console.log(width, "/", height);
-  const [vegetable, setVegetable] = useState([
-    {
-      vegetable: "🧅",
-      count: 5,
-    },
-    {
-      vegetable: "🍌",
-      count: 8,
-    },
-    {
-      vegetable: "🍇",
-      count: 3,
-    },
-    {
-      vegetable: "🥒",
-      count: 3,
-    },
-    {
-      vegetable: "🍈",
-      count: 1,
-    },
-    {
-      vegetable: "🥓",
-      count: 8,
-    },
-    {
-      vegetable: "🍅",
-      count: 2,
-    },
-    {
-      vegetable: "🥦",
-      count: 5,
-    },
-    {
-      vegetable: "🌽",
-      count: 8,
-    },
-  ]);
+  const [vegetable, setVegetable] = useState(data);
+  const [addVegetable, setAddVegetable] = useState();
+  const [addVegetableName, setAddVegetableName] = useState();
+  const [addVegetableCount, setAddVegetableCount] = useState();
   const [modalView, setModalView] = useState(false);
   const [listModalView, setListModalView] = useState(false);
+  const [addModalView, setAddModalView] = useState(false);
   const [selectedVegetable, setSelectedVegetable] = useState(0);
 
   return (
@@ -75,7 +45,73 @@ const Fridge = ({ width, height }) => {
           <Text style={{ margin: 150 }}>close</Text>
         </Pressable>
       </Modal>
-      <View style={{ flex: 0.1 }} />
+      <View style={{ flex: 0.1 }}>
+        <Modal
+          visible={addModalView}
+          onRequestClose={() => setAddModalView(!addModalView)}
+          style={[styles.Modal]}
+        >
+          <TextInput
+            style={{ marginTop: 50 }}
+            value={addVegetable}
+            onChangeText={setAddVegetable}
+            placeholder={"채소의 이모티콘을 적어주세요 (냉장고에 표시 됩니다!)"}
+          />
+          <TextInput
+            value={addVegetableName}
+            onChangeText={setAddVegetableName}
+            placeholder={"채소의 이름을 적어주세요 (게시글 태그 기능을 합니다)"}
+          />
+          <TextInput
+            value={addVegetableCount}
+            onChangeText={setAddVegetableCount}
+            placeholder={"가지고 계신 채소의 수량을 적어주세요!"}
+            keyboardType="number-pad"
+          />
+          <Pressable>
+            <Text
+              onPress={() => {
+                if (
+                  addVegetable != null &&
+                  addVegetableName != null &&
+                  addVegetableCount != null
+                ) {
+                  setVegetable([
+                    ...vegetable,
+                    {
+                      vegetable: addVegetable,
+                      name: addVegetableName,
+                      count: addVegetableCount,
+                    },
+                  ]);
+                  setAddVegetable();
+                  setAddVegetableName();
+                  setAddVegetableCount();
+                  setAddModalView(false);
+                } else {
+                  console.log("공백 안돼");
+                  Alert.alert("빈칸 없이 작성해주세요.");
+                }
+              }}
+            >
+              저장
+            </Text>
+            <Text
+              onPress={() => {
+                setAddVegetable();
+                setAddVegetableName();
+                setAddVegetableCount();
+                setAddModalView(false);
+              }}
+            >
+              닫기
+            </Text>
+          </Pressable>
+        </Modal>
+        <Pressable onPress={() => setAddModalView(true)}>
+          <Text>채소 추가</Text>
+        </Pressable>
+      </View>
       <View style={{ flex: 0.4 }}>
         <ImageBackground
           style={{ flex: 1 }}
@@ -203,17 +239,38 @@ const Fridge = ({ width, height }) => {
               <DraxList
                 data={vegetable}
                 renderItemContent={({ item }) => (
-                  <View
+                  <SafeAreaView
                     style={{
-                      flexDirection: "row",
                       margin: 15,
                       borderWidth: 1,
                       width: 100,
                     }}
                   >
-                    <Text style={{ fontSize: 30 }}>{item.vegetable}</Text>
-                    <Text style={{ fontSize: 30 }}>{item.count}</Text>
-                  </View>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Text style={{ fontSize: 30 }}>{item.vegetable}</Text>
+                      <Text style={{ fontSize: 30 }}>{item.count}</Text>
+                      <Pressable>
+                        <Text
+                          onPress={() =>
+                            setVegetable(
+                              vegetable.filter(
+                                (vege) => vege.name !== item.name
+                              )
+                            )
+                          }
+                        >
+                          삭제
+                        </Text>
+                      </Pressable>
+                    </View>
+                    <View style={[styles.VegetableListTag]}>
+                      <Text>#{item.name}</Text>
+                    </View>
+                  </SafeAreaView>
                 )}
                 onItemReorder={({ fromIndex, toIndex }) => {
                   const newData = vegetable.slice();
@@ -262,6 +319,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginLeft: 35,
     marginTop: 26,
+  },
+  VegetableListTag: {
+    marginLeft: 5,
   },
 });
 
