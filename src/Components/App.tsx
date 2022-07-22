@@ -9,7 +9,22 @@ import {
 } from "react-native";
 import Fridge from "./Fridge";
 import List_Of_Posts from "./List_Of_Posts";
+import Post_View from "./Post_View";
+
 const { width, height } = Dimensions.get("window");
+const item = {
+  post_ID: 4,
+  writer_ID: 1823,
+  writer: "말하는 감자",
+  title: "양구 멜론 사여",
+  desc: "양구 멜론 내나",
+  image:
+    "https://img0.yna.co.kr/etc/inner/KR/2015/07/13/AKR20150713054200030_01_i_P4.jpg",
+  myTag: "만원",
+  youTag: "양구 멜론",
+  conditions: "최상",
+  location: "흥업사거리",
+};
 
 const App = () => {
   return (
@@ -21,7 +36,8 @@ const App = () => {
       > */}
       {/* <Fridge width={width - 80} height={height - 340} /> */}
       {/* <Text>Open up App.tsx to start working on your app!</Text> */}
-      <List_Of_Posts />
+      {/* <List_Of_Posts /> */}
+      <Post_View item={item} />
       {/* </ImageBackground> */}
     </SafeAreaView>
   );
