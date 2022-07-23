@@ -13,7 +13,10 @@ import locationIcon from "../Resources/icons/location.png";
 import Carbon_Footprint_ZERO from "../Resources/Carbon_Footprint/zero.png";
 
 const { width, height } = Dimensions.get("window");
-const Post_View = ({ item }) => {
+const Post_View = ({navigation, route}) => {
+  const item = route.params
+  console.log(item)
+
   const myTag = item.myTag.split(",");
   const youTag = item.youTag.split(",");
   return (

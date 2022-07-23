@@ -10,7 +10,8 @@ import {
   Pressable,
 } from "react-native";
 import locationIcon from "../Resources/icons/location.png";
-import Post_View from "./Post_View";
+// import Post_View from "./Post_View";
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get("window");
 
@@ -19,12 +20,12 @@ const touch_POST = (item) => {
 };
 
 const DESC_VIEW_MAX_LENGTH = 34;
-const List_Of_Posts = () => {
+const List_Of_Posts = ( { navigation }) => {
   const list_DATA = require("../../Post_List.json");
   console.log(list_DATA);
   const [list, setList] = useState(list_DATA);
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{marginTop: width/15}}>
       <View></View>
       <View>
         <FlatList
@@ -36,7 +37,10 @@ const List_Of_Posts = () => {
               <Pressable
                 style={styles.ListBox}
                 key={item.item.postID}
-                onPress={() => console.log(item.item)}
+                onPress={() => {
+                  console.log(item.item)
+                  navigation.navigate('Post_View', item.item)}
+                }
               >
                 <Image style={styles.ListImage} source={item.item.image} />
                 <SafeAreaView style={{ flexDirection: "column" }}>
@@ -81,6 +85,7 @@ const styles = StyleSheet.create({
     width: width - 50,
     flexDirection: "row",
     marginVertical: 10,
+    marginLeft: 25
   },
   ListImage: {
     width: 100,
