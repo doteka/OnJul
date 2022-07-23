@@ -36,20 +36,22 @@ const Post_View = ({ item }) => {
         </SafeAreaView>
         <SafeAreaView style={tagStyles.tagBox}>
           <SafeAreaView style={{ flexDirection: "row" }}>
-            <Text style={[tagStyles.TagFont, tagStyles.myTag]}>#나</Text>
+            <Text key={"myTag"} style={[tagStyles.TagFont, tagStyles.myTag]}>#나</Text>
             {myTag.map((item) => {
               return (
-                <Text style={[tagStyles.TagFont, tagStyles.myTag]}>
+                <Text key={"myTag_" + item} style={[tagStyles.TagFont, tagStyles.myTag]}>
                   #{item}
                 </Text>
               );
             })}
+            {item.conditions && <Text style={[tagStyles.TagFont, tagStyles.myTag]}>#상태</Text>}
+            {item.conditions && <Text style={[tagStyles.TagFont, tagStyles.myTag]}>#{item.conditions}</Text>}
           </SafeAreaView>
           <SafeAreaView style={{ flexDirection: "row" }}>
-            <Text style={[tagStyles.TagFont, tagStyles.youTag]}>#너</Text>
+            <Text key={"youTag"} style={[tagStyles.TagFont, tagStyles.youTag]}>#너</Text>
             {youTag.map((item) => {
               return (
-                <Text style={[tagStyles.TagFont, tagStyles.youTag]}>
+                <Text key={"youTag_" + item} style={[tagStyles.TagFont, tagStyles.youTag]}>
                   #{item}
                 </Text>
               );

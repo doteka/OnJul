@@ -10,6 +10,7 @@ import {
   Pressable,
 } from "react-native";
 import locationIcon from "../Resources/icons/location.png";
+import Post_View from "./Post_View";
 
 const { width, height } = Dimensions.get("window");
 
@@ -29,14 +30,13 @@ const List_Of_Posts = () => {
         <FlatList
           data={list}
           renderItem={(item) => {
-            const tag = item.item.tag.split("/");
-            const myTag = tag[0].split(",");
-            const youTag = tag[1].split(",");
+            const myTag = item.item.myTag.split(",");
+            const youTag = item.item.youTag.split(",");
             return (
               <Pressable
                 style={styles.ListBox}
                 key={item.item.postID}
-                onPress={() => touch_POST(item.item)}
+                onPress={() => console.log(item.item)}
               >
                 <Image style={styles.ListImage} source={item.item.image} />
                 <SafeAreaView style={{ flexDirection: "column" }}>
