@@ -11,52 +11,57 @@ import {
 } from "react-native";
 import locationIcon from "../Resources/icons/location.png";
 // import Post_View from "./Post_View";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
-const touch_POST = (item) => {
-  console.log(item);
-};
-
 const DESC_VIEW_MAX_LENGTH = 34;
-const List_Of_Posts = ( { navigation }) => {
+const List_Of_Posts = ({ navigation }) => {
   const list_DATA = require("../../Post_List.json");
   console.log(list_DATA);
   const [list, setList] = useState(list_DATA);
   return (
-    <SafeAreaView style={{marginTop: width/15}}>
+    <SafeAreaView style={{ marginTop: width / 15 }}>
       <View></View>
       <View>
         <FlatList
           data={list}
           renderItem={(item) => {
-            const myTag = item.item.myTag.split(",");
-            const youTag = item.item.youTag.split(",");
             return (
               <Pressable
                 style={styles.ListBox}
                 key={item.item.postID}
                 onPress={() => {
-                  console.log(item.item)
-                  navigation.navigate('Post_View', item.item)}
-                }
+                  console.log(item.item);
+                  navigation.navigate("Post_View", item.item);
+                }}
               >
-                <Image style={styles.ListImage} source={item.item.image} />
+                <Image
+                  style={styles.ListImage}
+                  source={{ uri: item.item.image[0] }}
+                />
                 <SafeAreaView style={{ flexDirection: "column" }}>
                   <Text style={styles.ListTitle}>{item.item.title}</Text>
-                  <Text>
+                  <Text style={styles.ListDesc}>
                     {item.item.desc.length < DESC_VIEW_MAX_LENGTH
                       ? item.item.desc
                       : item.item.desc.substring(0, DESC_VIEW_MAX_LENGTH) +
                         "..."}
                   </Text>
                   <SafeAreaView style={{ flexDirection: "row" }}>
-                    {myTag.map((item) => {
-                      return <Text style={styles.myTag}>#{item}</Text>;
+                    {item.item.myTag.map((item) => {
+                      return (
+                        <Text key={"myTags" + item} style={styles.myTag}>
+                          #{item}
+                        </Text>
+                      );
                     })}
-                    {youTag.map((item) => {
-                      return <Text style={styles.youTag}>#{item}</Text>;
+                    {item.item.youTag.map((item) => {
+                      return (
+                        <Text key={"youTags" + item} style={styles.youTag}>
+                          #{item}
+                        </Text>
+                      );
                     })}
                   </SafeAreaView>
                   <SafeAreaView
@@ -85,7 +90,7 @@ const styles = StyleSheet.create({
     width: width - 50,
     flexDirection: "row",
     marginVertical: 10,
-    marginLeft: 25
+    marginLeft: 25,
   },
   ListImage: {
     width: 100,
@@ -95,6 +100,9 @@ const styles = StyleSheet.create({
   ListTitle: {
     fontSize: 20,
     fontWeight: "700",
+  },
+  ListDesc: {
+    flexShrink: 1,
   },
   myTag: {
     backgroundColor: "#DDFFFF",
