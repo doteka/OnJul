@@ -5,7 +5,7 @@
     "writer": "흥업뿅망치",
     "title": "대파가 필요해요 ㅠㅠ",
     "desc": "흥업 사거리 직거래\n제가 양파 드릴게여 대파 주세요 ㅠㅠ",
-    "image": ["https://t1.daumcdn.net/cfile/tistory/9931463359D8DDE634"],
+    "image": ["https://t1.daumcdn.net/cfile/tistory/9931463359D8DDE634","http://www.busan.com/nas/data/content/image/2018/07/04/20180704000106_0.jpg","https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201904/19/ecddb9f6-fa43-405a-abf9-01f85e4f0484.jpg"],
     "myTag": ["양파"],
     "youTag": ["대파"],
     "conditions": "최상",
@@ -19,7 +19,7 @@
     "desc": "흥업 사거리 직거래\n제가 양파 드릴게여 대파 주세요 ㅠㅠ",
     "image": ["https://t1.daumcdn.net/cfile/tistory/9931463359D8DDE634"],
     "myTag": ["양파"],
-    "youTag": ["대파", "사과"],
+    "youTag": ["대파,사과"],
     "conditions": "최상",
     "location": "흥업사거리"
   },
@@ -30,7 +30,7 @@
     "title": "대파가 필요해요 ㅠㅠ",
     "desc": "흥업 사거리 직거래\n양파내나양파내나양파내나양파내나양파내나\n양파내나양파내나양파내나양파내나양파내나양파내나양파내나양파내나",
     "image": ["https://t1.daumcdn.net/cfile/tistory/9931463359D8DDE634"],
-    "myTag": ["양파", "멜론"],
+    "myTag": ["양파","멜론"],
     "youTag": ["대파"],
     "conditions": "최상",
     "location": "흥업사거리"
@@ -41,9 +41,7 @@
     "writer": "말하는 감자",
     "title": "양구 멜론 사여...",
     "desc": "양구 멜론 먹고 싶어요...\n제발 ...",
-    "image": [
-      "https://img0.yna.co.kr/etc/inner/KR/2015/07/13/AKR20150713054200030_01_i_P4.jpg"
-    ],
+    "image": ["https://img0.yna.co.kr/etc/inner/KR/2015/07/13/AKR20150713054200030_01_i_P4.jpg"],
     "myTag": ["만원"],
     "youTag": ["양구 멜론"],
     "conditions": "최상",

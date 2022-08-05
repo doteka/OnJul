@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -9,6 +9,8 @@ import {
   FlatList,
   Pressable,
   View,
+  Modal
+
 } from "react-native";
 // import { ScrollView } from "react-native-gesture-handler";
 import ImageViewer from "react-native-image-zoom-viewer";
@@ -25,11 +27,41 @@ const images = [
 const Post_View = ({ navigation, route }) => {
   const need_My_Tag = require("../../needs_My_Tag.json");
   const item = route.params;
-  console.log(item.image);
+  const postImage = item.image;
+  const [active, setActive] = useState(0);
+
+  const _imageChange = ({nativeEvent}) => {
+    const slider = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width)
+    if (slider != active) {
+      setActive(slider)
+    }
+  }
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
-        {/* <ImageViewer style={styles.Image} imageUrls={images} /> */}
+        {/* <Image source={item.image[0]} style={styles.Image} /> */}
+        <View style={styles.Post_Image}>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            onScroll={_imageChange}
+            showsHorizontalScrollIndicator={false}>
+            {
+              postImage.map((item, index) => {
+                return (
+                <Image key={"POST_IMAGE_" + index} source={{uri:item}} style={styles.Image} />)
+              })
+            }
+          </ScrollView>
+          <View style={{flexDirection: 'row', position: 'absolute', bottom: 0, alignSelf: 'center'}}>
+            {
+            postImage.map((item, index) => {
+              return (<Text key={"navi"+index} style={[ styles.Image_Navi_Font, index==active?styles.Image_Navi_On:styles.Image_Navi_Off]}>⬤</Text>)
+
+            })
+            }
+          </View>
+        </View>
         <SafeAreaView style={styles.UserInfo}>
           <Pressable onPress={() => navigation.navigate("userInfo", item)}>
             <Image style={styles.UserImage} source={userImage} />
@@ -172,11 +204,26 @@ const Post_View = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
+  Post_Image: {
+    width: width,
+    height: height / 2
+  },
   Image: {
     width: width,
     height: height / 2,
     marginTop: 0,
     flex: 1,
+  },
+  Image_Navi_Font: {
+    fontSize: 18,
+    margin: 2,
+    marginBottom: 5,
+  },
+  Image_Navi_On: {
+    color: '#ffffff'
+  },
+  Image_Navi_Off: {
+    color: '#888'
   },
   UserImage: {
     width: 50,
